@@ -105,21 +105,9 @@ driverTable.AddColumns("ID", "Name");
 
 foreach (var driver in drivers)
 {
-        driverTable.AddRow(new Row(driver.ID, driver.Name));
+        driverTable.AddRow(id, driver.Name);
         id++;
 }
 
 Console.WriteLine("DRIVERS:");
 AnsiConsole.Write(driverTable);
-
-public class Row
-{
-    public int ID { get; set; }
-    public string Name { get; set; }
-
-    public Row(int id, string name)
-    {
-        ID = id;
-        Name = name;
-    }
-}
