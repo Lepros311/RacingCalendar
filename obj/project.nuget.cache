@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QoLTdkD0AkE=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Andrew\\Documents\\coding stuff\\C#\\ZTM\\RacingCalendar\\RacingCalendar.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Andrew\\.nuget\\packages\\consoletable\\1.0.1.1\\consoletable.1.0.1.1.nupkg.sha512",
+    "C:\\Users\\Andrew\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512"
+  ],
+  "logs": []
+}
