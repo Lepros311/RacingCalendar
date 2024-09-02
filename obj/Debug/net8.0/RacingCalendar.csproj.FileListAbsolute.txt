@@ -16,3 +16,4 @@ C:\Users\Andrew\Documents\coding stuff\C#\ZTM\RacingCalendar\bin\Debug\net8.0\Co
 C:\Users\Andrew\Documents\coding stuff\C#\ZTM\RacingCalendar\obj\Debug\net8.0\RacingCalendar.csproj.AssemblyReference.cache
 C:\Users\Andrew\Documents\coding stuff\C#\ZTM\RacingCalendar\obj\Debug\net8.0\RacingCa.C885DF48.Up2Date
 C:\Users\Andrew\Documents\coding stuff\C#\ZTM\RacingCalendar\bin\Debug\net8.0\Spectre.Console.dll
+C:\Users\Andrew\Documents\coding stuff\C#\ZTM\RacingCalendar\obj\Debug\net8.0\RacingCalendar.sourcelink.json
