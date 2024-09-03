@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Diagnostics;
 using ConsoleTable;
+using System.Runtime.CompilerServices;
 
 public class Race
 {
@@ -32,7 +33,7 @@ public class Race
 
             for (int i = 0; i < 5; i++)
             {
-                if (race.Properties["Drivers"] == currentDriver)
+                if (race.Properties!["Drivers"] == currentDriver)
                 {
                     i--;
                     continue;
@@ -72,14 +73,9 @@ public class Race
         }
     }
 
-    public static void AddADriver()
+    public static void AddADriver(List<Race> races, List<Queue<Driver>> waitlists)
     {
-
-    }
-
-    public static void RemoveADriver(List<Race> races, Spectre.Console.Table calTable)
-    {
-        Console.WriteLine("Enter the ID of the race you want to remove a driver from:");
+        Console.WriteLine("\nEnter the ID of the race you want to add a driver to:");
 
         string[] raceIdOptions = { "1", "2", "3" };
         string? raceIdInput;
@@ -88,7 +84,84 @@ public class Race
             raceIdInput = Console.ReadLine();
             if (!raceIdOptions.Contains(raceIdInput))
             {
-                Console.WriteLine("That is not a valid option. You must enter 1, 2, or 3.");
+                Console.WriteLine("\nThat is not a valid option. You must enter 1, 2, or 3.");
+            }
+        } while (!raceIdOptions.Contains(raceIdInput));
+
+        switch (raceIdInput)
+        {
+            case "1":
+                string driverNames1 = races[0].Properties!["Drivers"].ToString()!;
+                List<string> driverNamesList1 = driverNames1.Split(',').Select(x => x.Trim()).ToList();
+                if (driverNamesList1.Count == 5)
+                {
+                    Console.WriteLine("\nUnable to add driver. This race already has the maximum of 5 drivers.\n");
+                }
+                else
+                {
+                    Driver driverToAdd = waitlists[0].Dequeue();
+                    string driverNamesString = races[0].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesToList = driverNames1.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList1.Add(driverToAdd.Name);
+
+                    Console.WriteLine($"\n{driverToAdd.Name} has been added to Race 1.\n");
+
+                    races[0].Properties!["Drivers"] = string.Join(", ", driverNamesList1);
+                }
+                break;
+            case "2":
+                string driverNames2 = races[1].Properties!["Drivers"].ToString()!;
+                List<string> driverNamesList2 = driverNames2.Split(',').Select(x => x.Trim()).ToList();
+                if (driverNamesList2.Count == 5)
+                {
+                    Console.WriteLine("\nUnable to add driver. This race already has the maximum of 5 drivers.\n");
+                }
+                else
+                {
+                    Driver driverToAdd = waitlists[1].Dequeue();
+                    string driverNamesString = races[1].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesToList = driverNames2.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList2.Add(driverToAdd.Name);
+
+                    Console.WriteLine($"\n{driverToAdd.Name} has been added to Race 2.\n");
+
+                    races[1].Properties!["Drivers"] = string.Join(", ", driverNamesList2);
+                }
+                break;
+            case "3":
+                string driverNames3 = races[2].Properties!["Drivers"].ToString()!;
+                List<string> driverNamesList3 = driverNames3.Split(',').Select(x => x.Trim()).ToList();
+                if (driverNamesList3.Count == 5)
+                {
+                    Console.WriteLine("\nUnable to add driver. This race already has the maximum of 5 drivers.\n");
+                }
+                else
+                {
+                    Driver driverToAdd = waitlists[2].Dequeue();
+                    string driverNamesString = races[2].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesToList = driverNames3.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList3.Add(driverToAdd.Name);
+
+                    Console.WriteLine($"\n{driverToAdd.Name} has been added to Race 3.\n");
+
+                    races[2].Properties!["Drivers"] = string.Join(", ", driverNamesList3);
+                }
+                break;
+        }
+    }
+
+    public static void RemoveADriver(List<Race> races, Spectre.Console.Table calTable)
+    {
+        Console.WriteLine("\nEnter the ID of the race you want to remove a driver from:");
+
+        string[] raceIdOptions = { "1", "2", "3" };
+        string? raceIdInput;
+        do
+        {
+            raceIdInput = Console.ReadLine();
+            if (!raceIdOptions.Contains(raceIdInput))
+            {
+                Console.WriteLine("\nThat is not a valid option. You must enter 1, 2, or 3.\n");
             }
         } while (!raceIdOptions.Contains(raceIdInput));
 
@@ -98,41 +171,64 @@ public class Race
         switch (raceIdInput)
         {
             case "1":
-                Console.WriteLine("Enter the name of the driver you want to remove from Race 1");
+                Console.WriteLine("\nEnter the name of the driver you want to remove from Race 1:");
                 driverName = Console.ReadLine();
                 driverName = driverName!.Trim();
                 driverName = textInfo.ToTitleCase(driverName);
-                if (races[0].Properties["Drivers"].ToString()!.Split(new char[] { ',' }, StringSplitOptions.None).Any(name => name.Trim().Equals(driverName, StringComparison.OrdinalIgnoreCase)))
+                if (races[0].Properties!["Drivers"].ToString()!.Split(new char[] { ',' }, StringSplitOptions.None).Any(name => name.Trim().Equals(driverName, StringComparison.OrdinalIgnoreCase)))
                 {
-                    string driverNames = races[0].Properties["Drivers"].ToString();
-                    races[0].Properties["Drivers"] = "";
-                    Console.WriteLine($"{driverName} has been removed.");
-
-
+                    string driverNames = races[0].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesList = driverNames.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList.Remove(driverName);
                     
-                    driverNames = races[0].Properties["Drivers"].ToString();
+                    Console.WriteLine($"\n{driverName} has been removed from Race 1.\n");
 
-                    foreach (var property in races[0].Properties)
-                    {
-                        if (races[0].Properties["Drivers"].ToString() != driverName)
-                        {
-                            driverNames?.Append(driverName);
-                            driverNames?.Append(", ");
-                        }
-                    }
-
-                    races[0].Properties["Drivers"] = driverNames.ToString().TrimEnd(',', ' ');
+                    races[0].Properties!["Drivers"] = string.Join(", ", driverNamesList);
                 }
                 else
                 {
-                    Console.WriteLine($"{driverName} is not listed in this race.");
+                    Console.WriteLine($"\n{driverName} is not listed in this race.\n");
                 }
                 break;
             case "2":
-                
+                Console.WriteLine("\nEnter the name of the driver you want to remove from Race 2:");
+                driverName = Console.ReadLine();
+                driverName = driverName!.Trim();
+                driverName = textInfo.ToTitleCase(driverName);
+                if (races[1].Properties!["Drivers"].ToString()!.Split(new char[] { ',' }, StringSplitOptions.None).Any(name => name.Trim().Equals(driverName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    string driverNames = races[1].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesList = driverNames.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList.Remove(driverName);
+
+                    Console.WriteLine($"\n{driverName} has been removed from Race 2.\n");
+
+                    races[1].Properties!["Drivers"] = string.Join(", ", driverNamesList);
+                }
+                else
+                {
+                    Console.WriteLine($"\n{driverName} is not listed in this race.\n");
+                }
                 break;
             case "3":
-                
+                Console.WriteLine("\nEnter the name of the driver you want to remove from Race 3:");
+                driverName = Console.ReadLine();
+                driverName = driverName!.Trim();
+                driverName = textInfo.ToTitleCase(driverName);
+                if (races[2].Properties!["Drivers"].ToString()!.Split(new char[] { ',' }, StringSplitOptions.None).Any(name => name.Trim().Equals(driverName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    string driverNames = races[2].Properties!["Drivers"].ToString()!;
+                    List<string> driverNamesList = driverNames.Split(',').Select(x => x.Trim()).ToList();
+                    driverNamesList.Remove(driverName);
+
+                    Console.WriteLine($"\n{driverName} has been removed from Race 3.\n");
+
+                    races[2].Properties!["Drivers"] = string.Join(", ", driverNamesList);
+                }
+                else
+                {
+                    Console.WriteLine($"\n{driverName} is not listed in this race.\n");
+                }
                 break;
         }
     }

@@ -13,7 +13,7 @@ var calTable = new Table();
 
 void CreateDrivers()
 {
-    allDrivers.Add(new Driver("Al Unser Jr."));
+    allDrivers.Add(new Driver("Richard Petty"));
     allDrivers.Add(new Driver("Ricardo Patrese"));
     allDrivers.Add(new Driver("Erik Carlsson"));
     allDrivers.Add(new Driver("Craig Breedlove"));
@@ -23,7 +23,7 @@ void CreateDrivers()
     allDrivers.Add(new Driver("Richard Burns"));
     allDrivers.Add(new Driver("David Pearson"));
     allDrivers.Add(new Driver("Jean Behra"));
-    allDrivers.Add(new Driver("Wolfgang von Trips"));
+    allDrivers.Add(new Driver("Dale Earnhardt"));
     allDrivers.Add(new Driver("Henry Segrave"));
     allDrivers.Add(new Driver("Gerhard Berger"));
     allDrivers.Add(new Driver("David Coulthard"));
@@ -61,8 +61,12 @@ void CreateWaitlists()
 
 void CreateCalTable()
 {
+    calTable.Rows.Clear();
 
-    calTable.AddColumns("ID", "Race", "Date", "Track", "Drivers");
+    if (calTable.Columns.Count <= 0)
+    {
+        calTable.AddColumns("ID", "Race", "Date", "Track", "Drivers (Max 5 per race)");
+    }
 
     foreach (var race in races)
     {
@@ -72,7 +76,7 @@ void CreateCalTable()
             string? name = race.Properties["Name"]?.ToString();
             string? date = race.Properties["Date"]?.ToString();
             string? track = race.Properties["Track"]?.ToString();
-            string? drivers = race.Properties["Drivers"].ToString();
+            string? drivers = race.Properties["Drivers"]?.ToString();
 
             if (raceId != null && name != null && date != null && track != null && drivers != null)
             {
@@ -110,6 +114,7 @@ CreateWaitlists();
 
 Console.WriteLine("Press any key to randomly assign drivers to each race...");
 Console.ReadKey();
+Console.Clear();
 
 Race.AddDrivers(races, allDrivers, waitlists, tempDriversList);
 
@@ -145,7 +150,7 @@ CreateWaitlistTable();
 
 void PrintMenu()
 {
-    Console.WriteLine("MAIN MENU");
+    Console.WriteLine("\nMAIN MENU");
     Console.WriteLine("1) Add a Driver to a Race");
     Console.WriteLine("2) Remove a Driver from a Race");
     Console.WriteLine("3) Exit program");
@@ -156,11 +161,11 @@ void GetUserMenuSelection()
     string[] menuOptions = { "1", "2", "3" };
     do
     {
-        Console.WriteLine("What would you like to do? Enter 1, 2, or 3:");
+        Console.WriteLine("\nWhat would you like to do? Enter 1, 2, or 3:");
         userMenuChoice = Console.ReadLine();
         if (!menuOptions.Contains(userMenuChoice))
         {
-            Console.WriteLine("That is not a valid option. You must enter 1, 2, or 3.");
+            Console.WriteLine("\nThat is not a valid option. You must enter 1, 2, or 3.");
         }
     } while (!menuOptions.Contains(userMenuChoice));
 }
@@ -172,7 +177,9 @@ void MenuSelectionControl(string userMenuChoice)
         case "1":
             Console.Clear();
             CreateCalTable();
-            Race.AddADriver();
+            CreateWaitlistTable();
+            Race.AddADriver(races, waitlists);
+            CreateCalTable();
             break;
         case "2":
             Console.Clear();
