@@ -91,6 +91,12 @@ public class Race
         switch (raceIdInput)
         {
             case "1":
+                if (waitlists[0].ToList().All(x => x.Name == ""))
+                {
+                    Console.WriteLine("\nThere are no waitlisted drivers available for Race 1.");
+                    AddADriver(races, waitlists);
+                    break;
+                }
                 string driverNames1 = races[0].Properties!["Drivers"].ToString()!;
                 List<string> driverNamesList1 = driverNames1.Split(',').Select(x => x.Trim()).ToList();
                 if (driverNamesList1.Count == 5)
@@ -100,6 +106,7 @@ public class Race
                 else
                 {
                     Driver driverToAdd = waitlists[0].Dequeue();
+                    waitlists[0].Enqueue(new Driver(""));
                     string driverNamesString = races[0].Properties!["Drivers"].ToString()!;
                     List<string> driverNamesToList = driverNames1.Split(',').Select(x => x.Trim()).ToList();
                     driverNamesList1.Add(driverToAdd.Name);
@@ -110,6 +117,12 @@ public class Race
                 }
                 break;
             case "2":
+                if (waitlists[1].ToList().All(x => x.Name == ""))
+                {
+                    Console.WriteLine("\nThere are no waitlisted drivers available for Race 2.");
+                    AddADriver(races, waitlists);
+                    break;
+                }
                 string driverNames2 = races[1].Properties!["Drivers"].ToString()!;
                 List<string> driverNamesList2 = driverNames2.Split(',').Select(x => x.Trim()).ToList();
                 if (driverNamesList2.Count == 5)
@@ -119,6 +132,7 @@ public class Race
                 else
                 {
                     Driver driverToAdd = waitlists[1].Dequeue();
+                    waitlists[1].Enqueue(new Driver(""));
                     string driverNamesString = races[1].Properties!["Drivers"].ToString()!;
                     List<string> driverNamesToList = driverNames2.Split(',').Select(x => x.Trim()).ToList();
                     driverNamesList2.Add(driverToAdd.Name);
@@ -129,6 +143,12 @@ public class Race
                 }
                 break;
             case "3":
+                if (waitlists[2].ToList().All(x => x.Name == ""))
+                {
+                    Console.WriteLine("\nThere are no waitlisted drivers available for Race 3.");
+                    AddADriver(races, waitlists);
+                    break;
+                }
                 string driverNames3 = races[2].Properties!["Drivers"].ToString()!;
                 List<string> driverNamesList3 = driverNames3.Split(',').Select(x => x.Trim()).ToList();
                 if (driverNamesList3.Count == 5)
@@ -138,6 +158,7 @@ public class Race
                 else
                 {
                     Driver driverToAdd = waitlists[2].Dequeue();
+                    waitlists[2].Enqueue(new Driver(""));
                     string driverNamesString = races[2].Properties!["Drivers"].ToString()!;
                     List<string> driverNamesToList = driverNames3.Split(',').Select(x => x.Trim()).ToList();
                     driverNamesList3.Add(driverToAdd.Name);
@@ -188,6 +209,8 @@ public class Race
                 else
                 {
                     Console.WriteLine($"\n{driverName} is not listed in this race.\n");
+                    RemoveADriver(races, calTable);
+                    break;
                 }
                 break;
             case "2":
@@ -208,6 +231,8 @@ public class Race
                 else
                 {
                     Console.WriteLine($"\n{driverName} is not listed in this race.\n");
+                    RemoveADriver(races, calTable);
+                    break;
                 }
                 break;
             case "3":
@@ -228,6 +253,8 @@ public class Race
                 else
                 {
                     Console.WriteLine($"\n{driverName} is not listed in this race.\n");
+                    RemoveADriver(races, calTable);
+                    break;
                 }
                 break;
         }
