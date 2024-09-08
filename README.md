@@ -14,4 +14,4 @@ This project is part of Zero to Mastery's [C# course](https://zerotomastery.io/c
 
 ## Try It Out!
 
-[Racing Waitlist](https://replit.com/@lepros/AccountingSystem)
+[Racing Calendar](https://replit.com/@lepros/AccountingSystem)
