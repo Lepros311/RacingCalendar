@@ -1,4 +1,4 @@
-﻿﻿# Racing Calendar
+﻿# Racing Calendar
 
 This project is part of Zero to Mastery's [C# course](https://zerotomastery.io/courses/csharp-net-bootcamp/). The goal is to implement a racing calendar for a fictional racing series. The primary focus for this project is to practice using different .NET collections in a console app. It allows the user to set the races' lineups with a random selection of drivers. Then the user can remove any driver and replace them with the next-in-line driver on that race's waitlist.
 
