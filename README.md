@@ -12,6 +12,6 @@ This project is part of Zero to Mastery's [C# course](https://zerotomastery.io/c
 - [x] Add a driver to any race. If the driver is successfully added, print a message.
 - [x] Simulate a waiting list. Choose a .NET collection to store drivers on the waiting list. You should be able to take the next driver from the list. The driver taken from the waitlist should be the driver first in line.
 
-## Try It Out!
+<?## Try It Out!]?>
 
-[Racing Calendar](https://replit.com/@lepros/AccountingSystem)
+<?[Racing Calendar](https://replit.com/@lepros/AccountingSystem)?>
